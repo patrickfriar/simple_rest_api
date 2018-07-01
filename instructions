@@ -1,0 +1,62 @@
+mkdir for new project folder
+
+npm init to create new project
+
+file name, version, description (add), entry point (default index.js), test command,
+git, and keywords blank, add name, license isc is w/e
+>hit enter
+
+install dependencies:
+npm install --save express body-parser mongoose   (mongoose is only for mongo)
+
+
+now create new entry file in txt editor:
+
+create server.js for example
+
+var express = require('express');
+app = express();
+bodyParser = require('body-parser');
+mongoose = require('mongoose');
+
+next, configure the app for bodyParser, which lets us grab data from
+the api post
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+now set up the PORT for the server to listen on
+var port - process.env.PORT || 3000;
+
+now connect to db
+
+mongoose.connect('mongodb://localhost:27017/codealong');
+
+now create Routes
+var router = express.Router();
+
+prefix all routes with /API
+app.use('/api', router);
+
+now testing a route
+router.get('/', function(req,res){
+res.json({message:
+Welcome to our API!});
+})          // router is getting the main directory, running a request
+to gain a response. the response json output is a message "welcome to our api"
+
+
+
+launching server:
+app.listen(port);
+and print a message:
+console.log('server listening on port ' + port);
+
+
+pull terminal back up, open new instance or tab
+
+run mongod in new tab/window  cd to "C:\Program Files\MongoDB\Server\3.6\bin\"
+and run mongod.exe on the next line to start up on 27017
+
+in other terminal, run program w/  node server.js (entry point file)
+"server listening" message should be returned
